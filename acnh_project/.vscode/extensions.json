@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "bmewburn.vscode-intelephense-client",
+    "junstyle.php-cs-fixer",
+    "phproberto.vscode-php-getters-setters",
+    "mehedidracula.php-namespace-resolver"
+
+  ]
+}

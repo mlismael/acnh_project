@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "php.validate.executablePath": "/usr/bin/php",
+  "php.suggest.basic": false,
+  "intelephense.files.associations": ["*.php"],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "php-getters-setters.chain": true,
+  "php-getters-setters.visibility": "public",
+  "php-getters-setters.null": true
+}
