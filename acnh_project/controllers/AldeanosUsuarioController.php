@@ -66,6 +66,23 @@ class AldeanosUsuarioController
         echo json_encode(['status' => 'success', 'data' => $items]);
     }
 
+    public function contarPorUsuario()
+    {
+        $this->setCorsHeaders();
+
+        if (empty($_REQUEST['id_usuario'])) {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'id_usuario requerido']);
+            exit;
+        }
+
+        require 'models/AldeanosUsuarioModel.php';
+        $modelo = new AldeanosUsuarioModel();
+        $total = $modelo->contarPorUsuario($_REQUEST['id_usuario']);
+
+        echo json_encode(['status' => 'success', 'data' => ['total' => $total]]);
+    }
+
     public function crear()
     {
         $this->setCorsHeaders();

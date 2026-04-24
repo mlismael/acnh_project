@@ -68,9 +68,24 @@ class AldeanosUsuarioModel
         return $gsent->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function contarPorUsuario($id_usuario)
+    {
+        $gsent = $this->db->prepare('SELECT COUNT(*) as total FROM ALDEANOS_USUARIO WHERE id_usuario = ?');
+        $gsent->bindParam(1, $id_usuario);
+        $gsent->execute();
+        $result = $gsent->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total'];
+    }
+
     public function crear($id_usuario, $id_api, $url_api, $nombre_aldeano, $imagen_aldeano, $personalidad)
     {
         try {
+            // Verificar que el usuario no tenga ya 10 aldeanos
+            $totalAldeanos = $this->contarPorUsuario($id_usuario);
+            if ($totalAldeanos >= 10) {
+                throw new Exception('El usuario ya tiene el máximo de 10 aldeanos permitidos');
+            }
+
             $gsent = $this->db->prepare('INSERT INTO ALDEANOS_USUARIO (id_usuario, id_api, url_api, nombre_aldeano, imagen_aldeano, personalidad) VALUES (?, ?, ?, ?, ?, ?)');
             $gsent->bindParam(1, $id_usuario);
             $gsent->bindParam(2, $id_api);
